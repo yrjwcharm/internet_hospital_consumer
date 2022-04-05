@@ -1,0 +1,60 @@
+@mixin all($border-color,$border-radius:5PX){
+  position: relative;
+  &:after{
+    content:" ";
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: left top;
+    box-sizing: border-box;
+    border: 1px solid $border-color;
+    border-radius:$border-radius*2;
+  }
+}
+@mixin top_line($color:rgba(204,204,204,0.4),$style:solid){
+  position: relative;
+  &:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    content: '';
+    border-top: 1px $style $color;
+    -webkit-transform: scale(0.5);
+    transform: scaleY(0.5);
+  }
+}
+@mixin commonFontStyle($fontSize,$fontWeight,$color,$fontFamily:PingFangSC-Regular) {
+  font-size: $fontSize;
+  font-family: $fontFamily, PingFang SC;
+  font-weight: $fontWeight;
+  color: $color;
+}
+
+@mixin bottom_line($color:rgba(204,204,204,0.4),$style:solid) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    content: '';
+    border-top: 1px $style $color;
+    -webkit-transform: scale(0.5);
+    transform: scaleY(0.5);
+  }
+}
+/**s
+ * 默认主题下 $color-border-light
+ */
+@mixin ell() {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

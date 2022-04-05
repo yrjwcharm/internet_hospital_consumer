@@ -1,0 +1,275 @@
+.live-player-wrap{
+  height: 100%;
+  background: black;
+}
+.containerBase {
+  height: 70vh;
+  font-size: 0;
+  letter-spacing: -4px;
+  overflow-y: scroll;
+  background: black;
+}
+/*.view-baseplayer{*/
+/*  height: 100%;*/
+/*}*/
+.navigator{
+  display: flex;
+  width: 100%;
+  height: 88px;
+  flex-direction: row;
+  align-items: center;
+  background: #000;
+  justify-content: center;
+}
+.mini-title{
+  color: #fff;
+  font-size:28px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+}
+.view-baseplayer{
+  /*position: relative;*/
+  /*overflow: hidden;*/
+}
+.live-pusher-active{
+  position: absolute;
+  top:0;
+  right:0;
+  width: 25vw;
+  height: 25vw;
+  z-index: 10;
+}
+.rich-text{
+  display: inline-block;
+}
+live-pusher, live-player {
+  position: relative;
+  display: inline-block;
+  width: 50vw;
+  margin: 0;
+  padding: 0;
+  height: 50vw;
+}
+.bottom-wrap{
+  /*background: black;*/
+  width: 100%;
+  background: black;
+  position: fixed;
+  z-index: 12;
+  bottom: 0;
+  right: 0;
+  /*z-index: 12;*/
+}
+/*.room-input {*/
+/*  height: 80rpx;*/
+/*  border-bottom:1px solid rgba(13, 112, 255, 0.5);*/
+/*}*/
+/*.util-btn {*/
+/*  display: inline-block;*/
+/*  margin: 1vw;*/
+/*  font-size: 20rpx;*/
+/*  background: rgba(13, 112, 255, 0.5);*/
+/*  color: #fff;*/
+/*}*/
+
+.util-btn {
+  float: left;
+  display: inline-block;
+  font-size: 26px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background: #06B48D;
+  color: #fff;
+}
+.img-box {
+  z-index: 12;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.cover-user-name{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.username{
+  width: 240px;
+  border-radius: 0;
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+  font-size: 28px;
+}
+.img-view{
+  width: 64px;
+  height: 64px;
+}
+.view-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height:200px ;
+}
+.view-wrap{
+  padding:0 40px 0 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.view-spin{
+  display: flex;
+}
+.image-spin{
+  width: 64px;
+  margin: auto;
+  height: 64px;
+}
+.view-sxt{
+  display: flex;
+}
+.image-sxt{
+  width: 64px;
+  margin: auto;
+  height: 64px;
+}
+.view-voice{
+  display: flex;
+}
+.image-voice{
+  width: 64px;
+  margin: auto;
+  height: 64px;
+}
+.view-speaker{
+  display: flex;
+}
+.image-speaker{
+  width: 64px;
+  margin: auto;
+  height: 64px;
+}
+.view-call{
+  /*margin: auto;*/
+  display: flex;
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  background: red;
+}
+.image-call{
+  margin: auto;
+  width: 64px;
+  height: 64px;
+}
+/*.view-mic{*/
+/*  height: 48px;*/
+/*  width: 48px;*/
+/*  border-radius: 24px;*/
+/*  border: 1px solid #fff;*/
+/*  display: flex;*/
+/*}*/
+/*.image-mic{*/
+/*  margin: auto;*/
+/*  width: 22px;*/
+/*  height: 32px;*/
+/*}*/
+.placeholder-class{
+  font-size: 28px;
+  color: #999;
+}
+/*.message-view .text-name {*/
+/*  color: #333;*/
+/*  font-size: 14px;*/
+/*}*/
+::-webkit-scrollbar {
+
+  width: 0;
+
+  height: 0;
+
+  color: transparent;
+
+}
+.list-row-camera{
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  padding-left: 48px;
+  padding-right: 48px;
+  background: #333;
+  justify-content: center;
+
+}
+.list-camera{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+  .camera{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .camera-icon{
+    width: 54px;
+    height: 44px;
+  }
+  .camera-text{
+    margin-top: 16px;
+    font-size: 28px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+  .video{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .video-icon{
+    width: 60px;
+    height: 42px;
+  }
+  .video-text{
+    margin-top: 16px;
+    font-size: 28px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+  .hangup{
+    width: 88px;
+    height: 88px;
+  }
+  .muted{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .muted-icon{
+    width: 46px;
+    height: 50px;
+  }
+  .muted-text{
+    margin-top: 16px;
+    font-size: 28px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+  .speaker{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .speaker-icon{
+    width: 50px;
+    height: 46px;
+  }
+  .speaker-text{
+    margin-top: 16px;
+    font-size: 28px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+  }

@@ -1,0 +1,70 @@
+<view class="live-player-wrap">
+<!--  <view style="padding-top:{{statusBarHeight}}px">-->
+<!--    <view class="navigator">-->
+<!--      <text class='mini-title'>音视频通话-{{roomID}}-({{userCount}})人</text>-->
+<!--    </view>-->
+<!--  </view>-->
+  <view class="containerBase">
+
+    <live-pusher wx:if="{{livePusherUrl}}" url="{{livePusherUrl}}" mode="RTC" aspect="3:4"
+                 min-bitrate="{{pushConfig.minBitrate}}" max-bitrate="{{pushConfig.maxBitrate}}"
+                 enable-camera="{{pushConfig.enableCamera}}" muted="{{pushConfig.muted}}"
+                 beauty="{{pushConfig.isBeauty}}" whiteness="{{pushConfig.isWhiteness}}"
+                 mirror="{{pushConfig.isMirror}}" orientation="vertical"
+                 debug="{{pushConfig.showLog}}" bindstatechange="onPushStateChange"
+                 bindnetstatus="onPushNetStateChange" binderror="onPushError"
+                 bindaudiovolumenotify="onPushAudiovolumenotify"
+                 waiting-image="https://storage.zego.im/downloads/pause_publish.png"></live-pusher>
+    <live-player
+      object-fit="fillCrop"
+      hidden="{{item.isHide}}"
+      sound-mode="{{isSpeaker?'speaker':'ear'}}"
+      orientation="vertical" wx:for="{{livePlayerList}}" wx:key="streamID"
+      id="{{item.streamID}}" src="{{item.url}}" mode="RTC"
+      autoplay enable-metadata="true" bindmetadatachange="binddatachange"
+      bindstatechange="onPlayStateChange" bindnetstatus="onPlayNetStateChange"
+    >
+      <cover-view class='img-box'>
+
+        <cover-image wx:if="{{playConfig.fullScreen}}" class='img-view'
+                     src='../../resource/smallscreen.png'
+                     id="{{'s-'+item.streamID}}" bindtap="toggleFullScreen"></cover-image>
+        <cover-image wx:else class='img-view'
+                     src='../../resource/fullscreen.png'
+                     id="{{'s-'+item.streamID}}" bindtap="toggleFullScreen"></cover-image>
+      </cover-view>
+      <cover-view class='cover-user-name'>
+        <button class="username">{{item.role == 1 ? '专家' : item.role == 2 ? '医生' : item.role == 3 ? '患者' : ''}}
+          {{item.userName}}
+        </button>
+      </cover-view>
+    </live-player>
+  </view>
+  <view class="bottom-wrap">
+    <view class="list-row-camera">
+      <view class="list-camera">
+        <view class="camera" bindtap="switchCamera">
+          <image mode="aspectFill" src="../../assets/change.png" class="camera-icon"/>
+          <text class="camera-text">切换</text>
+        </view>
+        <view class="video" bindtap="toggleCamera">
+<!--          <image mode="aspectFill" wx:if="{{pushConfig.enableCamera}}" src="../../assets/open-video.png" class="video-icon"/>-->
+          <image mode="aspectFill" wx:if="{{pushConfig.enableCamera}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAAv9JREFUaAXtmkGITVEYx98bI0VDIjYWNopCapSdRikrNlhRVtjYKEk2skAS2UmTCTvsJKZEr2ZhmoVmIZMhyWakKBNmjJl3/b7bPfd93d6bufcW75zn++rf+c53vnPf//+dc+57vXsrFTOrgFXAKmAVsApYBawCVoG/U4Gqu2wURSvwT4PdoBcsAr7YJERGwRNwrVqtzpQlFgtG7HYu8ACsL3uhfzjvNZ+1F9Hv5/tMNK1jvBtMkvs1zWWgB3wEIdkIZBenIhKHWBWcABNA21s6+yRNEi7RnknmSDMLXoIp6Xhiy+GxDaRHEP8YK9fv+KFDxm6A4y6WaSP6eyokDgNnv3F2ZBK96MLrgCOZtPccMfqycP2Z8WbdIRH8U40Mu4v42MLzs+L6TjjS7wIDKu7chzi3wScXoJ2RCdpqPgp1nCD6QZEVX8TeUTHnnldzai4ordzFQjX52rwLDmUEXOBsn8vEGl2tHr/WGPHPg59e4Qz1uHsxy1o06cSubELA/cus7NmF+HeK4CuI1V+tLXV3guCriJWfxLksdMHXEXsql9IkKWTBEWJPFhEruSELrhcVa4LLVKyNc+bKfLZt6TJVa9McO8N5Cm9bOk+VPMmxLZ1nIWxL56mSJzm2pfMshG3pPFXyJOe/29Jr+a9qZ9Hih7yllyD2cVHRIQuWxV1WVHTogguL7gTBhUSHLPgLSsdFbWK5tnfIgr8jtA+8SQRLs6DorGCfXnNQOlJX853lX8sJRvrAWJrREH2UO/h+4qvVWL1CcBw4+4ajE1Rue114bQR1R5T2kWOEvwa8UmOt3DF5evgcbEgmy5N2eZ3gPu10EvOh6YHEYaDfABhxxFhpeW68i/4zsMXFm7QDssKbwA8Qksk7HCuzgoitAk9bCLlJvDuuGM4RJt8Cvp9h0Sg3q4Os6qB0mhl65LWNrUB+jU2BIfL1HT1+daCXxBdgDvho05AaBO74oaO46TMRz+aCS3E2A2l9sV8QGWWVZLXMrAJWAauAVcAqYBUItAJ/AK10U1HsMQQvAAAAAElFTkSuQmCC"   class="video-icon"/>
+          <image mode="aspectFill" wx:else src="../../assets/close-video.png" class="video-icon"/>
+          <text class="video-text">{{pushConfig.enableCamera?'开启视频':'关闭视频'}}</text>
+        </view>
+        <image mode="aspectFill" src="../../assets/hangup.png" class="hangup" bindtap="handUp"/>
+        <view class="muted" bindtap="enableMute">
+          <image mode="aspectFill" wx:if="{{!pushConfig.muted}}" src="../../assets/open-silent.png" class="muted-icon"/>
+          <image mode="aspectFill" wx:else src="../../assets/close-silent.png" class="muted-icon"/>
+          <text class="muted-text">静音</text>
+        </view>
+        <view class="speaker" bindtap="onBindSpeaker">
+          <image mode="aspectFill" wx:if="{{isSpeaker}}"  src="../../assets/open-speaker.png" class="speaker-icon"/>
+          <image mode="aspectFill" wx:else  src="../../assets/close-speaker.png" class="speaker-icon"/>
+          <text class="speaker-text">免提</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

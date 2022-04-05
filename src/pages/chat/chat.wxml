@@ -1,0 +1,139 @@
+<view class='chating-wrapper' catchtap='chatingWrapperClick'>
+<!--  <view  class="nav" style="padding-top:{{statusBarHeight}}px">-->
+<!--    <view class="titlebar" bindtap="onGetMemberList">-->
+<!--      <text class='mini-title'>IM聊天-{{roomID}}-({{userCount}})人</text>-->
+<!--    </view>-->
+<!--  </view>-->
+  <scroll-view scroll-y  style="height:{{scrollHeight-44-(isIphoneX?keyboard_height?0:17:0)-statusBarHeight}}px" scroll-into-view="{{toView}}">
+    <!-- 消息记录 -->
+    <view class='record-wrapper' id="recordWrapper">
+      <block wx:for="{{messageList}}" wx:key="{{index}}" id="{{item.ID}}">
+        <view class='record-item-time-wrapper' wx:if="{{item.displayTimeHeader != ''}}">
+          <text  class='record-item-time'>{{item.displayTimeHeader}}</text>
+        </view>
+        <view id="msg-{{index}}" wx:if="{{item.isLeft}}" class="tui-chat-left">
+          <view class="tui-left">
+            <view class="avatar-img">
+              <image src="{{item.role==1?'../../assets//zj.png':item.role==2?'../../assets//doctor.png':'../../assets//patient.png'}}" class="avatar-img"/>
+            </view>
+            <view class='display:flex;flex-direction:column;'>
+              <text class="avatar-name">{{item.role==1?'专家':item.role==2?'医生':item.role==3?'患者':''}} {{item.name}}</text>
+              <view wx:if="{{item.type=='text'}}"  class="tui-chatbox tui-chatbox-left">
+                <text selectable="true" wx:if="{{item.selectable}}">{{item.content[0].text}}</text>
+                <rich-text wx:else nodes="{{item.content}}"></rich-text>
+              </view>
+              <view bindtap="downloadFile" data-url="{{item.content}}" wx:if="{{item.type=='file'}}">
+                <view class="tui-file tui-chatbox-left">
+                  <view class='file-container'>
+                    <view class="file-wrap">
+                      <text class="file-name">{{item.fileName}}</text>
+                      <text class="file-size">{{item.fileSize}}KB</text>
+                    </view>
+                    <image mode="aspectFill" wx:if="{{item.format=='doc'}}" src="../../assets//word.png" class="file-icon"/>
+                    <image mode="aspectFill" wx:elif="{{item.format=='xls'}}" src="../../assets//xlsx.png" class="file-icon"/>
+                    <image mode="aspectFill" wx:elif="{{item.format=='pdf'}}" src="../../assets//pdf.png" class="file-icon"/>
+                    <image mode="aspectFill" wx:elif="{{item.format=='zip'}}" src="../../assets//zip.png" class="file-icon"/>
+                    <image mode="aspectFill" wx:elif="{{item.format=='txt'}}" src="../../assets//text.png" class="file-icon"/>
+                    <image mode="aspectFill" wx:else src="../../assets//other.png" class="file-icon"/>
+                  </view>
+                </view>
+              </view>
+              <view class="tui-img-chatbox" bindtap="previewImg" data-url="{{item.url}}" wx:if="{{item.type=='image'}}">
+                <rich-text nodes="{{item.content}}"></rich-text>
+              </view>
+              <view wx:if="{{item.type=='audio'}}" class="tui-flex-center" data-url="{{item.url}}" catchtap='playAudio'>
+                <view class="tui-chatbox tui-chatbox-left tui-chat-flex tui-mr">
+                  <image src='../../assets//voice.png' class='tui-chat-voice tui-mr'></image>
+                  <view>{{item.duration}}''</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view id="msg-{{index}}" wx:if="{{!item.isLeft}}" class="tui-chat-right">
+          <view wx:if="{{item.type=='text'}}"   style="display:flex;align-items:center;margin-left:16px;">
+            <view class="tui-chatbox tui-chatbox-right">
+              <text selectable="true" wx:if="{{item.selectable}}">{{item.content[0].text}}</text>
+              <rich-text wx:else nodes="{{item.content}}"></rich-text>
+            </view>
+          </view>
+          <view bindtap="downloadFile" data-url="{{item.content}}" wx:if="{{item.type=='file'}}"   style="display:flex;align-items:center;margin-left:16px;">
+            <view class="tui-file tui-chatbox-right1">
+              <view class='file-container'>
+                <view class="file-wrap">
+                  <text class="file-name">{{item.fileName}}</text>
+                  <text class="file-size">{{item.fileSize}}KB</text>
+                </view>
+                <image mode="aspectFill" wx:if="{{item.format=='doc'}}" src="../../assets//word.png" class="file-icon"/>
+                <image mode="aspectFill" wx:elif="{{item.format=='xls'}}" src="../../assets//xlsx.png" class="file-icon"/>
+                <image mode="aspectFill" wx:elif="{{item.format=='pdf'}}" src="../../assets//pdf.png" class="file-icon"/>
+                <image mode="aspectFill" wx:elif="{{item.format=='zip'}}" src="../../assets//zip.png" class="file-icon"/>
+                <image mode="aspectFill" wx:elif="{{item.format=='txt'}}" src="../../assets//text.png" class="file-icon"/>
+                <image mode="aspectFill" wx:else src="../../assets//other.png" class="file-icon"/>
+              </view>
+            </view>
+          </view>
+          <!--                <view wx:if="{{item.type=='text'}}" style="display:flex;align-items:center;margin-left:16px;">-->
+          <!--                    <image wx:if="{{item.fail}}" bindtap="sendMsg" src="../../assets//fail.png" class="tui-chat-fail tui-mr"></image>-->
+          <!--                    <view class="tui-chatbox tui-chatbox-right">-->
+          <!--                        <text selectable="true">{{item.content[0].text}}</text>-->
+          <!--                    </view>-->
+          <!--                </view>-->
+          <view bindtap="previewImg" data-url="{{item.url}}" class="tui-flex-center tui-flex-end tui-flex-reverse" wx:if="{{item.type=='image'}}">
+            <view class="tui-img-chatbox">
+              <rich-text nodes="{{item.content}}"></rich-text>
+            </view>
+          </view>
+          <view wx:if="{{item.type=='audio'}}" class="tui-flex-center tui-flex-end" data-url="{{item.url}}" catchtap='playAudio'>
+            <view class="tui-chatbox tui-chatbox-right tui-chat-flex tui-ml tui-flex-reverse">
+              <image src="../../assets//voice.png" class="tui-chat-voice tui-rotate tui-ml"></image>
+              <view style="text-align:right">{{item.duration}}''</view>
+            </view>
+          </view>
+          <!--                <view class="tui-right">-->
+          <!--                    <text>{{item.name}}</text>-->
+          <!--                </view>-->
+          <open-data type="userAvatarUrl" class="tui-user-pic tui-right"></open-data>
+        </view>
+      </block>
+<!--    </view>-->
+    <!--底部输入框  -->
+    </view>
+  </scroll-view>
+  <view class='chatinput-wrapper' catchtap='stopEventPropagation' style="bottom:{{keyboard_height+'px'}}">
+    <view class='chatinput-content' style="{{isIphoneX?'margin-bottom:34rpx':'margin-bottom:0'}}">
+      <image src='{{sendType == 0 ? "../../assets/voice.png" : "../../images/keyboard.png"}}'
+             class='chatinput-img' catchtap='switchSendType'></image>
+      <input adjust-position="{{false}}"  wx:if="{{sendType == 0}}" value='{{inputMessage}}'
+             focus='{{focusFlag}}' bindinput='inputChange' bindfocus='inputFocus' bindblur='inputBlur'
+             bindconfirm='inputSend' placeholder-class="placeholerclass" class='chatinput-input' placeholder="输入你想回复医生的话…" confirm-type='send'></input>
+      <!-- <button wx:if="{{sendType == 1}}" class="{{ isLongPress ? 'chatinput-voice-mask chatinput-voice-mask-hover' : 'chatinput-voice-mask' }}" hover-class="none" catchtouchstart='longPressStart' catchlongpress='voiceBtnLongTap' catchtouchend='longPressEnd'>按住说话</button> -->
+      <button wx:if="{{sendType == 1}}"
+              class="{{ isLongPress ? 'chatinput-voice-mask chatinput-voice-mask-hover' : 'chatinput-voice-mask' }}"
+              hover-class="none" catchtouchstart='longPressStart' catchtouchend='longPressEnd'>
+        {{isLongPress ? '松开结束' : '按住说话'}}
+      </button>
+      <image src='../../assets/emoji.png' catchtap='toggleMore' class='chatinput-img more'></image>
+      <image src='../../assets/more.png' catchtap='toggleEmoji' class='chatinput-img'></image>
+    </view>
+    <view wx:if="{{emojiFlag}}" class='chatinput-subcontent'>
+      <component-emoji bind:EmojiClick="emojiCLick" bind:EmojiSend="emojiSend"></component-emoji>
+    </view>
+    <view wx:if="{{moreFlag}}" class='more-subcontent'>
+      <view style='display:flex;'>
+        <view class='more-subcontent-item' style="margin-right:20px;" catchtap='chooseImageFromCapture'>
+          <image src="../../images/picture.png" class='image'></image>
+          <text class='text'>相册</text>
+        </view>
+        <view class='more-subcontent-item' style="margin-right:20px;" catchtap='chooseImageFromCamera'>
+          <image src="../../images/camera.png" class='image'></image>
+          <text class='text'>拍摄</text>
+        </view>
+<!--        <view class='more-subcontent-item' catchtap='chooseFile'>-->
+<!--          <image src="../../images/choice-file.png" class='image'></image>-->
+<!--          <text class='text'>文件</text>-->
+<!--        </view>-->
+      </view>
+    </view>
+  </view>
+</view>

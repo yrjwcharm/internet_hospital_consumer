@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>形状_2_slice</title>
+    <g id="患者端" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-161.000000, -137.000000)" fill="#06B48D" fill-rule="nonzero">
+            <g id="形状-2" transform="translate(161.000000, 137.000000)">
+                <path d="M27,0 C12.24,0 0,12.24 0,27 C0,41.76 12.24,54 27,54 C41.76,54 54,41.76 54,27 C54,12.24 41.76,0 27,0 Z M42.48,20.16 L24.84,37.8 C23.76,38.88 22.32,38.88 21.24,37.8 L11.52,27.36 C10.44,26.28 10.8,24.84 11.52,23.76 C12.6,22.68 14.04,22.68 14.76,23.76 L23.4,32.4 L39.24,16.56 C40.32,15.48 41.76,15.84 42.84,16.56 C43.56,17.64 43.56,19.08 42.48,20.16 Z" id="形状"></path>
+            </g>
+        </g>
+    </g>
+</svg>

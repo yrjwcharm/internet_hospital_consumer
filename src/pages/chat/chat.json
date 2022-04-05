@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "接诊",
+  "navigationStyle": "default",
+  "usingComponents": {
+    "component-emoji": "../../components/emoji/emoji",
+    "input-modal": "../../components/inputmodal/inputmodal",
+    "tui-icon": "../../components/icon/icon",
+    "tui-badge": "../../components/badge/badge",
+    "tui-loadmore": "../../components/loadmore/loadmore"
+  }
+}
