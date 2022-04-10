@@ -1,5 +1,2 @@
-> taro-ui 是用react写的Taro组件库
-> taro-ui-vue 是用vue重写的Taro组件库
-> tabbar iconSize 48*48 标准形式
-> tabbar fontSize 14px  标准形式
-
+##### thanks
+![image](https://user-images.githubusercontent.com/34397383/162610673-57217d74-7922-4509-b4a1-650c948a59f8.png)
